@@ -13,20 +13,20 @@ INSTALL_DIR="${BUILD_DIR}/install"
 # =================================================
 echo "[1/4] Building organicmaps..."
 
-# if [ ! -d "$BUILD_DIR/organicmaps/" ]; then
-#     git clone --recurse-submodules https://github.com/organicmaps/organicmaps
-# else
-#     echo "Source allready present skiping"
-# fi
-# 
-# if [ ! -f "$BUILD_DIR/organicmaps/build/OMaps" ]; then
-#     mkdir -p $BUILD_DIR/organicmaps/build && cd $BUILD_DIR/organicmaps/build
-#     #$BUILD_DIR/organicmaps/tools/unix/build_omim.sh -r desktop
-#     cmake .. -DCMAKE_BUILD_TYPE=Release -GNinja -DCMAKE_TOOLCHAIN_FILE=${ROOT}/toolchain-arm64.cmake
-#     ninja desktop
-# else
-#     echo "Package allready built skipping..."
-# fi
+if [ ! -d "$BUILD_DIR/organicmaps/" ]; then
+    git clone --recurse-submodules https://github.com/organicmaps/organicmaps
+else
+    echo "Source allready present skiping"
+fi
+
+if [ ! -f "$BUILD_DIR/organicmaps/build/OMaps" ]; then
+    mkdir -p $BUILD_DIR/organicmaps/build && cd $BUILD_DIR/organicmaps/build
+    #$BUILD_DIR/organicmaps/tools/unix/build_omim.sh -r desktop
+    cmake .. -DCMAKE_BUILD_TYPE=Release -GNinja -DCMAKE_TOOLCHAIN_FILE=${ROOT}/toolchain-arm64.cmake
+    ninja desktop
+else
+    echo "Package allready built skipping..."
+fi
 
 # =================================================
 # STEP 6: Install dependencies
