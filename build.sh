@@ -15,12 +15,11 @@ echo "[1/4] Building organicmaps..."
 
 if [ ! -d "$BUILD_DIR/organicmaps/" ]; then
     git clone --recurse-submodules https://github.com/organicmaps/organicmaps
-    cp -r ${ROOT}/organicmaps $BUILD_DIR/
 else
     echo "Source allready present skiping"
 fi
 
-if [ ! -f "$BUILD_DIR/omim-build-release/OMaps" ]; then
+if [ ! -f "$BUILD_DIR/organicmaps/build/OMaps" ]; then
     mkdir -p $BUILD_DIR/organicmaps/build && cd $BUILD_DIR/organicmaps/build
     #$BUILD_DIR/organicmaps/tools/unix/build_omim.sh -r desktop
     cmake .. -DCMAKE_BUILD_TYPE=Release -GNinja -DCMAKE_TOOLCHAIN_FILE=${ROOT}/toolchain-arm64.cmake
@@ -34,10 +33,9 @@ fi
 # =================================================
 echo "[2/4] Install dependencies..."
 
- cd ${BUILD_DIR}
- DEPENDENCIES="libb2-1 libqt6core6t64 libopengl0 libqt6gui6 libqt6network6 libqt6opengl6 libqt6qml6 libqt6qmlmeta6 libqt6qmlmodels6 libqt6qmlworkerscript6 libqt6quick6 libqt6svg6 libqt6waylandclient6 libqt6waylandcompositor6 libqt6wlshellintegration6 libts0t64 qt6-gtk-platformtheme qt6-qpa-plugins qt6-svg-plugins qt6-wayland libpugixml1v5 libstb0t64 libagg2t64 libqt6openglwidgets6 libqt6widgets6 libqt6positioning6 libqt6dbus6 libxcb-cursor0"
- 
- for dep in $DEPENDENCIES ; do
+
+ DEPENDENCIES="libb2-1 libopengl0 libpugixml1v5 libstb0t64 libagg2t64 libxcb-cursor0 libstb0t64 libagg2t64 libxcb-cursor0 libts0t64 "
+  for dep in $DEPENDENCIES ; do
     echo "Handle $dep"
      if [ ! -d "${dep}.deb_extract_chsdjksd" ]; then
         apt download $dep:arm64
@@ -46,6 +44,30 @@ echo "[2/4] Install dependencies..."
         dpkg-deb -x "${dep}.deb" "${dep}.deb_extract_chsdjksd"
      fi
  done
+mkdir -p $BUILD_DIR/ubports-apt/etc/apt
+mkdir -p $BUILD_DIR/ubports-apt/var/lib/apt/lists/partial
+mkdir -p $BUILD_DIR/ubports-apt/var/cache/apt/archives/partial
+mkdir -p $BUILD_DIR/ubports-apt/etc/apt/sources.list.d/
+
+echo "deb https://repo.ubports.com/ 24.04-2.x main" > $BUILD_DIR//ubports-apt/etc/apt/sources.list
+
+apt -o Dir=$BUILD_DIR/ubports-apt -o Dir::Etc=$BUILD_DIR/ubports-apt/etc/apt -o Dir::State=$BUILD_DIR/ubports-apt/var/lib/apt  -o Dir::Cache=~$BUILD_DIR/ubports-apt/var/cache/apt -o Dir::Etc::trusted=/etc/apt/trusted.gpg -o Dir::Etc::trustedparts=/etc/apt/trusted.gpg.d update
+
+ cd ${BUILD_DIR}
+ DEPENDENCIES="libb2-1 libqt6core6t64 libopengl0 libqt6gui6 libqt6network6 libqt6opengl6 libqt6qml6 libqt6qmlmeta6 libqt6qmlmodels6 libqt6qmlworkerscript6 libqt6quick6 libqt6svg6 libqt6waylandclient6 libqt6waylandcompositor6 libqt6wlshellintegration6 qt6-gtk-platformtheme qt6-qpa-plugins qt6-svg-plugins qt6-wayland libpugixml1v5 libqt6openglwidgets6 libqt6widgets6 libqt6positioning6 libqt6dbus6 maliit-inputcontext-qt6 qtubuntu-qt6"
+ 
+ for dep in $DEPENDENCIES ; do
+    echo "Handle $dep"
+     if [ ! -d "${dep}.deb_extract_chsdjksd" ]; then
+        apt -o Dir=$BUILD_DIR/ubports-apt -o Dir::Etc=$BUILD_DIR/ubports-apt/etc/apt -o Dir::State=$BUILD_DIR/ubports-apt/var/lib/apt -o Dir::Cache=$BUILD_DIR/ubports-apt/var/cache/apt download $dep:arm64
+        mv ${dep}_*.deb ${dep}.deb
+        mkdir "${dep}.deb_extract_chsdjksd"
+        dpkg-deb -x "${dep}.deb" "${dep}.deb_extract_chsdjksd"
+     fi
+ done
+ 
+  echo "Handle qtubuntu-qt6"
+  wget https://repo.ubports.com/pool/main/q/qtubuntu-gles/qtubuntu-qt6_0.66~20251210073359.15~5499edf+ubports24.04.2_arm64.deb
 
 # ==============================
 # STEP 6: Copying files
