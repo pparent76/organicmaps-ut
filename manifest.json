@@ -1,0 +1,16 @@
+{
+    "name": "organicmaps.pparent",
+    "description": "Package for the organicmaps browser",
+    "architecture": "@CLICK_ARCH@",
+
+    "title": "Min browser",
+    "hooks": {
+        "organicmaps": {
+            "apparmor": "organicmaps.apparmor",
+            "desktop":  "organicmaps.desktop"
+        }
+    },
+    "version": "1.35.2-5",
+    "maintainer": "Pierre Parent <pro@pierre-parent.fr>",
+    "framework" : "ubuntu-touch-24.04-1.x"
+}

@@ -1,0 +1,6 @@
+clickable_minimum_required: 8.4.0
+builder: custom
+build: ${ROOT}/build.sh
+framework: ubuntu-touch-24.04-1.x
+dependencies_host: ["qemu-user-static" , "tree" , "patchelf", "git", "jq", "curl", "build-essential", "debhelper-compat", "cmake", "xauth", "xvfb","optipng", "libflathashmap-dev", "libfreetype-dev","fakeroot","gcc-aarch64-linux-gnu", "g++-aarch64-linux-gnu", "libc6-dev-arm64-cross", "cmake", "ninja-build" ]
+dependencies_target: [  "libagg2-dev", "libboost-dev", "libexpat1-dev", "libfast-float-dev", "libglm-dev", "libgmock-dev", "libharfbuzz-dev", "libicu-dev", "libjansson-dev", "libminizip-dev", "libprotobuf-dev", "libpugixml-dev","libqt6svg6", "libstb-dev", "libutfcpp-dev", "qt6-base-dev", "qt6-positioning-dev","qt6-svg-dev", "libqt6core6t64", "libgflags-dev", "libgflags2.2", "protobuf-compiler", "libxrandr-dev", "libxinerama-dev", "libxcursor-dev", "libxi-dev", "zlib1g-dev" ]

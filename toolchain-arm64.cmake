@@ -1,0 +1,9 @@
+set(CMAKE_SYSTEM_NAME Linux)
+set(CMAKE_SYSTEM_PROCESSOR aarch64)
+
+# Compilateurs
+set(CMAKE_C_COMPILER aarch64-linux-gnu-gcc)
+set(CMAKE_CXX_COMPILER aarch64-linux-gnu-g++)
+
+# Qt6
+set(Qt6_DIR /usr/lib/aarch64-linux-gnu/cmake/Qt6)
