@@ -5,3 +5,7 @@ This repository create a .click package from the github repository of Organic Ma
 https://github.com/organicmaps/organicmaps
 
 # Build
+
+In order to build the .click package, use clickable:
+
+clickable build --arch arm64
