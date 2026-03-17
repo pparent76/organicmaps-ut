@@ -54,7 +54,7 @@ echo "deb https://repo.ubports.com/ 24.04-2.x main" > $BUILD_DIR//ubports-apt/et
 apt -o Dir=$BUILD_DIR/ubports-apt -o Dir::Etc=$BUILD_DIR/ubports-apt/etc/apt -o Dir::State=$BUILD_DIR/ubports-apt/var/lib/apt  -o Dir::Cache=~$BUILD_DIR/ubports-apt/var/cache/apt -o Dir::Etc::trusted=/etc/apt/trusted.gpg -o Dir::Etc::trustedparts=/etc/apt/trusted.gpg.d update
 
  cd ${BUILD_DIR}
- DEPENDENCIES="libqt6core6t64 libopengl0 libqt6gui6 libqt6network6 libqt6opengl6 libqt6qml6 libqt6qmlmeta6 libqt6qmlmodels6 libqt6qmlworkerscript6 libqt6quick6 libqt6svg6 libqt6waylandclient6 libqt6waylandcompositor6 libqt6wlshellintegration6 qt6-gtk-platformtheme qt6-qpa-plugins qt6-svg-plugins qt6-wayland libpugixml1v5 libqt6openglwidgets6 libqt6widgets6 libqt6positioning6 libqt6dbus6 maliit-inputcontext-qt6 qtubuntu-qt6"
+ DEPENDENCIES="libqt6core6t64 libqt6gui6 libqt6network6 libqt6opengl6 libqt6qml6 libqt6qmlmeta6 libqt6qmlmodels6 libqt6qmlworkerscript6 libqt6quick6 libqt6svg6 libqt6waylandclient6 libqt6waylandcompositor6 libqt6wlshellintegration6 qt6-gtk-platformtheme qt6-qpa-plugins qt6-svg-plugins qt6-wayland libpugixml1v5 libqt6openglwidgets6 libqt6widgets6 libqt6positioning6 libqt6dbus6 maliit-inputcontext-qt6 qtubuntu-qt6 libqt6core5compat6 libqt6gui6 libqt6dbus6 liblomiri-content-hub-qt6-1 liblomiri-download-manager-client-qt6-0 libldm-common-qt6-0 liblomiri-download-manager-common-qt6-0 "
  
  for dep in $DEPENDENCIES ; do
     echo "Handle $dep"
